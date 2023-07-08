@@ -40,5 +40,24 @@ router.get('/:user_id', async (req, res) => {
     }
 });
 
+// Update user by ID
+router.put('/:user_id', async (req, res) => {
+    try {
+        const updatedInfo = req.body;
+        const user = await User.findByIdAndUpdate(
+            req.params.user_id,
+            updatedInfo,
+            { new: true }
+        );
+        if (user) {
+            res.status(200).json(user);
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 
 export { router as userRoutes };
