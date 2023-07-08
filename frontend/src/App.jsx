@@ -1,33 +1,22 @@
-import React from 'react';
-import { Route, Link, Routes } from 'react-router-dom';
-import UserList from './components/UserList';
+import { Route, Routes } from 'react-router-dom';
 import UserForm from './components/UserForm';
 import UserDetails from './components/UserDetails';
+import Layouts from './components/Layouts';
+import Home from './pages/Home';
+import Users from './pages/Users';
 
 const App = () => {
   return (
-    <>
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <div className="collapse navbar-collapse">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link to="/users" className="nav-link">
-                  Users
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-
-        <Routes>
-          <Route path="/users" element={<UserList />} />
-          <Route path="/users/create" element={<UserForm />} />
-          <Route path="/users/:userId/edit" element={<UserForm />} />
-          <Route path="/users/:userId" element={<UserDetails />} />
-        </Routes>
-      </div>
-    </>
+    <Layouts>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/create" element={<UserForm />} />
+        <Route path="/:userId/edit" element={<UserForm />} />
+        <Route path="/:userId" element={<UserDetails />} />
+        <Route path="*" element={<h1>Not Found</h1>} />
+      </Routes>
+    </Layouts>
   );
 };
 

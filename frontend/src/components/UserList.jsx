@@ -31,10 +31,6 @@ const UserList = () => {
 
   return (
     <div>
-      <h2>User List</h2>
-      <Link to="/users/create" className="btn btn-primary mb-3">
-        Add User
-      </Link>
       <table className="table">
         <thead>
           <tr>
@@ -49,10 +45,10 @@ const UserList = () => {
               <td>{user._id}</td>
               <td>{user.name}</td>
               <td>
-                <Link to={`/users/${user._id}`} className="btn btn-info me-2">
+                <Link to={`/${user._id}`} className="btn btn-info me-2">
                   View
                 </Link>
-                <Link to={`/users/${user._id}/edit`} className="btn btn-primary me-2">
+                <Link to={`/${user._id}/edit`} className="btn btn-primary me-2">
                   Edit
                 </Link>
                 <button
