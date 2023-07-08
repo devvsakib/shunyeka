@@ -31,14 +31,17 @@ const List = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user) => (
-                        <tr key={user._id}>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.phone}</td>
-                            <td>{user._id}</td>
-                        </tr>
-                    ))}
+                    {
+                        users.length === 0 ? <tr><td colSpan="4" className="text-center">No Users Found</td></tr>
+                            :
+                            users.map((user) => (
+                                <tr key={user._id}>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.phone}</td>
+                                    <td>{user._id}</td>
+                                </tr>
+                            ))}
                 </tbody>
             </table>
         </div>

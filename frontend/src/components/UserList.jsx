@@ -40,26 +40,29 @@ const UserList = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user._id}>
-              <td>{user._id}</td>
-              <td>{user.name}</td>
-              <td className='flex items-center'>
-                <Link to={`/${user._id}`} className="py-2 px-3 border-none btn-info me-2">
-                  View
-                </Link>
-                <Link to={`/${user._id}/edit`} className="py-2 px-3 border-none btn-primary me-2">
-                  Edit
-                </Link>
-                <button
-                  className="py-2 px-3 border-none btn-danger"
-                  onClick={() => handleDeleteUser(user._id)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+          {
+            users.length === 0 ? <tr><td colSpan="4" className="text-center">No Users Found</td></tr>
+              :
+              users.map((user) => (
+                <tr key={user._id}>
+                  <td>{user._id}</td>
+                  <td>{user.name}</td>
+                  <td className='flex items-center'>
+                    <Link to={`/${user._id}`} className="py-2 px-3 border-none btn-info me-2">
+                      View
+                    </Link>
+                    <Link to={`/${user._id}/edit`} className="py-2 px-3 border-none btn-primary me-2">
+                      Edit
+                    </Link>
+                    <button
+                      className="py-2 px-3 border-none btn-danger"
+                      onClick={() => handleDeleteUser(user._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
         </tbody>
       </table>
     </div>
