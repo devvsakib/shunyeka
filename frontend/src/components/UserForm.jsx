@@ -44,6 +44,7 @@ const UserForm = () => {
     e.preventDefault();
     if (userId) {
       dispatch(updateUser({ userId, user: formData }));
+      history('/users');
     } else {
       try {
         const response = await dispatch(createUser(formData));
