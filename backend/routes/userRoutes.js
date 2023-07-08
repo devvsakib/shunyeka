@@ -60,4 +60,18 @@ router.put('/:user_id', async (req, res) => {
 });
 
 
+// Delete user by ID
+router.delete('/:user_id', async (req, res) => {
+    try {
+        const user = await User.findByIdAndDelete(req.params.user_id);
+        if (user) {
+            res.status(204).json({ message: 'User deleted successfully' });
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 export { router as userRoutes };
