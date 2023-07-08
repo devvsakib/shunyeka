@@ -4,19 +4,25 @@ import axios from 'axios';
 // base URL
 const apiUrl = 'http://localhost:3000';
 
-// Fetch all users from the backend API
+// Fetch all users
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
   const response = await axios.get(`${apiUrl}/users`);
   return response.data;
 });
 
-// Create a new user in the backend API
+// Create a new user
 export const createUser = createAsyncThunk('users/createUser', async (user) => {
   const response = await axios.post(`${apiUrl}/users`, user);
   return response.data;
 });
 
-// Update a user in the backend API
+// Fetch a single user by ID
+export const fetchUserById = createAsyncThunk('users/fetchUserById', async (userId) => {
+  const response = await axios.get(`${apiUrl}/users/${userId}`);
+  return response.data;
+});
+
+// Update a user
 export const updateUser = createAsyncThunk(
   'users/updateUser',
   async ({ userId, user }) => {
@@ -25,7 +31,7 @@ export const updateUser = createAsyncThunk(
   }
 );
 
-// Delete a user from the backend API
+// Delete a user
 export const deleteUser = createAsyncThunk(
   'users/deleteUser',
   async (userId) => {
@@ -74,11 +80,11 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        const { userId, user } = action.payload;
-        const index = state.users.findIndex((u) => u._id === userId);
-        if (index !== -1) {
-          state.users[index] = user;
-        }
+        const updatedUser = action.payload;
+        const updatedUsers = state.users.map((user) =>
+          user._id === updatedUser._id ? updatedUser : user
+        );
+        state.users = updatedUsers;
         state.loading = false;
       })
       .addCase(updateUser.rejected, (state, action) => {
@@ -97,6 +103,24 @@ const userSlice = createSlice({
       .addCase(deleteUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(fetchUserById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserById.fulfilled, (state, action) => {
+        const fetchedUser = action.payload;
+        const existingUser = state.users.find((user) => user._id === fetchedUser._id);
+        if (existingUser) {
+          Object.assign(existingUser, fetchedUser);
+        } else {
+          state.users.push(fetchedUser);
+        }
+        state.loading = false;
+      })
+      .addCase(fetchUserById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });
@@ -104,5 +128,6 @@ const userSlice = createSlice({
 export const selectUsers = (state) => state.user.users;
 export const selectLoading = (state) => state.user.loading;
 export const selectError = (state) => state.user.error;
+export const selectUserById = (state, userId) => state.user.users.find((user) => user._id === userId);
 
 export default userSlice.reducer;
