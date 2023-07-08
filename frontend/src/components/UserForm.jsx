@@ -9,11 +9,13 @@ const UserForm = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const user = useSelector((state) => selectUserById(state, userId));
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
   });
+
 
   useEffect(() => {
     if (userId) {
@@ -38,15 +40,25 @@ const UserForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (userId) {
       dispatch(updateUser({ userId, user: formData }));
     } else {
-      dispatch(createUser(formData));
+      try {
+        const response = await dispatch(createUser(formData));
+        if (response.payload && response.payload.error) {
+          setError(response.payload.error);
+        } else {
+          history('/users');
+        }
+      } catch (error) {
+        console.log('Error:', error);
+      }
     }
-    history('/users');
   };
+  
+  
 
   return (
     <div>
@@ -71,6 +83,7 @@ const UserForm = () => {
             value={formData.email}
             onChange={handleInputChange}
           />
+          {error && <div className="error">{error}</div>}
         </div>
         <div className="mb-3">
           <label className="form-label">Phone</label>
