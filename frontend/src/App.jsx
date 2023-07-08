@@ -21,10 +21,10 @@ const App = () => {
         </nav>
 
         <Routes>
-          <Route exact path="/users" component={UserList} />
-          <Route exact path="/users/create" component={UserForm} />
-          <Route exact path="/users/:userId/edit" component={UserForm} />
-          <Route exact path="/users/:userId" component={UserDetails} />
+          <Route path="/users" element={<UserList />} />
+          <Route path="/users/create" element={<UserForm />} />
+          <Route path="/users/:userId/edit" element={<UserForm />} />
+          <Route path="/users/:userId" element={<UserDetails />} />
         </Routes>
       </div>
     </>
