@@ -26,6 +26,7 @@ const List = () => {
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Phone</th>
                         <th>ID</th>
                     </tr>
                 </thead>
@@ -34,6 +35,7 @@ const List = () => {
                         <tr key={user._id}>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
+                            <td>{user.phone}</td>
                             <td>{user._id}</td>
                         </tr>
                     ))}
