@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // base URL
-const apiUrl = 'http://localhost:3000';
+const apiUrl = 'https://usermanagementbackend1.onrender.com';
 
 // Fetch all users
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
