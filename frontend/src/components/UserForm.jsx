@@ -51,12 +51,12 @@ const UserForm = () => {
   return (
     <div>
       <Title text={userId ? 'Update User' : 'Create User'} />
-      <form onSubmit={handleSubmit} className="grid justify-center mt-16">
+      <form onSubmit={handleSubmit} className="w-[400px] mx-auto rounded-xl grid justify-center mt-16 bg-table_bg/10 backdrop-blur-sm text-white p-5 sm:p-10">
         <div className="mb-3">
           <label className="form-label">Name</label>
           <input
             type="text"
-            className="form-control"
+            className="form-control w-full py-2 px-3 bg-white/10 rounded mt-2 shadow-lg"
             name="name"
             value={formData.name}
             onChange={handleInputChange}
@@ -66,7 +66,7 @@ const UserForm = () => {
           <label className="form-label">Email</label>
           <input
             type="email"
-            className="form-control w-full"
+            className="form-control w-full py-2 px-3 bg-white/10 rounded mt-2 shadow-lg"
             name="email"
             value={formData.email}
             onChange={handleInputChange}
@@ -76,7 +76,7 @@ const UserForm = () => {
           <label className="form-label">Phone</label>
           <input
             type="text"
-            className="form-control w-full"
+            className="form-control w-full py-2 px-3 bg-white/10 rounded mt-2 shadow-lg"
             name="phone"
             value={formData.phone}
             onChange={handleInputChange}
