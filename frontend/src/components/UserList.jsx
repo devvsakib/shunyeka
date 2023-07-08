@@ -30,7 +30,7 @@ const UserList = () => {
   }
 
   return (
-    <div>
+    <div className='overflow-x-scroll'>
       <table className="table">
         <thead>
           <tr>
@@ -44,15 +44,15 @@ const UserList = () => {
             <tr key={user._id}>
               <td>{user._id}</td>
               <td>{user.name}</td>
-              <td>
-                <Link to={`/${user._id}`} className="btn btn-info me-2">
+              <td className='flex items-center'>
+                <Link to={`/${user._id}`} className="py-2 px-3 border-none btn-info me-2">
                   View
                 </Link>
-                <Link to={`/${user._id}/edit`} className="btn btn-primary me-2">
+                <Link to={`/${user._id}/edit`} className="py-2 px-3 border-none btn-primary me-2">
                   Edit
                 </Link>
                 <button
-                  className="btn btn-danger"
+                  className="py-2 px-3 border-none btn-danger"
                   onClick={() => handleDeleteUser(user._id)}
                 >
                   Delete
