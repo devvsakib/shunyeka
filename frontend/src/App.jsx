@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { Route, Link, Routes } from 'react-router-dom';
 import UserList from './components/UserList';
 import UserForm from './components/UserForm';
 import UserDetails from './components/UserDetails';
 
 const App = () => {
   return (
-    <Router>
+    <>
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="collapse navbar-collapse">
@@ -27,7 +27,7 @@ const App = () => {
           <Route exact path="/users/:userId" component={UserDetails} />
         </Routes>
       </div>
-    </Router>
+    </>
   );
 };
 
